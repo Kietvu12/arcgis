@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Test Graphics Layer</title>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.14/"></script>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/widgets/Sketch/SketchViewModel",
+      "esri/Graphic",
+      "esri/layers/GraphicsLayer",
+      "esri/geometry/support/webMercatorUtils"
+    ], function(
+      Map, MapView, SketchViewModel, Graphic, GraphicsLayer, webMercatorUtils
+    ) {
+
+      let editGraphic;
+
+      // GraphicsLayer to hold graphics created via sketch view model
+      const graphicsLayer = new GraphicsLayer({
+        id: "tempGraphics"
+      });
+
+      const map = new Map({
+        basemap: "gray",
+        layers: [graphicsLayer]
+      });
+
+      const view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-121.5, 38.555],
+        zoom: 11
+      });
+
+ 
+      var point = {
+        type: "point", // autocasts as new Point()
+        longitude: -121.5,
+        latitude: 38.555
+      };
+
+      var markerSymbol = {
+        type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
+        url: "https://daraobeirne.github.io/kisspng-drawing-pin-world-map-logo-push-vector-5ae029f6ddeaf4.198342921524640246909.png",
+        width: "30px",
+        height: "30px"
+      };
+
+
+      var pointGraphic = new Graphic({
+        geometry: webMercatorUtils.geographicToWebMercator(point),
+        symbol: markerSymbol
+      });
+
+
+      view.when(function () {
+
+        graphicsLayer.graphics.add(pointGraphic);
+
+        // create a new sketch view model
+        const sketchViewModel = new SketchViewModel({
+          view: view,
+          layer: graphicsLayer,
+          updateOnGraphicClick: true,
+          pointSymbol: markerSymbol
+        });
+
+        setUpClickHandler();
+
+        sketchViewModel.on("update-complete", updateGraphic);
+        sketchViewModel.on("update-cancel", updateGraphic);
+        sketchViewModel.on('update', function(evt){
+          evt.graphics[0].symbol = markerSymbol;
+        });
+
+        function updateGraphic(event) {
+          var graphic = new Graphic({
+            geometry: event.geometry,
+            symbol: editGraphic.symbol
+          });
+          graphicsLayer.add(graphic);
+
+          editGraphic = null;
+        }
+
+        function setUpClickHandler() {
+          view.on("click", function (event) {
+            view.hitTest(event).then(function (response) {
+              var results = response.results;
+              if (results.length > 0) {
+                for (var i = 0; i < results.length; i++) {
+                  // Check if we're already editing a graphic
+                  if (!editGraphic && results[i].graphic.layer.id === "tempGraphics") {
+                    // Save a reference to the graphic we intend to update
+                    editGraphic = results[i].graphic;
+                    // Remove the graphic from the GraphicsLayer
+                    // Sketch will handle displaying the graphic while being updated
+                    graphicsLayer.remove(editGraphic);
+                    sketchViewModel.update([editGraphic]);
+                    break;
+                  }
+                }
+              }
+            });
+          });
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Phần mềm thiết kế tuyến cáp</title>
+    <!-- <link rel="icon" href="./logo.png" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <link
+      rel="stylesheet"
+      href="./template_admin/front-dashboard/assets/css/vendor.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./template_admin/front-dashboard/assets/css/theme.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./template_admin/front-dashboard/assets/vendor/icon-set/style.css"
+    />
+    <title>React App</title>
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
+    />
+  </head>
+  <body
+    class=" has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-closed-mode"
+    style="max-height: 100vh;max-width: 100vw;height: 100vh;width: 100vw;"
+  >
+      
+    <wc-toast></wc-toast>
+    <!-- Search Form -->
+    <div
+      id="searchDropdown"
+      class="hs-unfold-content dropdown-unfold search-fullwidth d-md-none hs-unfold-hidden hs-unfold-content-initialized hs-unfold-css-animation animated"
+      data-hs-target-height="0"
+      data-hs-unfold-content=""
+      data-hs-unfold-content-animation-in="fadeIn"
+      data-hs-unfold-content-animation-out="fadeOut"
+      style="animation-duration: 300ms;"
+    >
+      <form class="input-group input-group-merge input-group-borderless">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="tio-search"></i>
+          </div>
+        </div>
+
+        <input
+          class="form-control rounded-0"
+          type="search"
+          placeholder="Search in front"
+          aria-label="Search in front"
+        />
+
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <div class="hs-unfold">
+              <a
+                class="js-hs-unfold-invoker"
+                href="javascript:;"
+                data-hs-unfold-options='{
+                     "target": "#searchDropdown",
+                     "type": "css-animation",
+                     "animationIn": "fadeIn",
+                     "hasOverlay": "rgba(46, 52, 81, 0.1)",
+                     "closeBreakpoint": "md"
+                   }'
+                data-hs-unfold-target="#searchDropdown"
+                data-hs-unfold-invoker=""
+              >
+                <i class="tio-clear tio-lg"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- End Search Form -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <!-- Navbar Vertical -->
+
+    <!-- End Navbar Vertical -->
+
+    <main id="content" role="main" class="main">
+      <!-- Content -->
+      <div class="content container-fluid p-0">
+        <div id="root" style="max-width: 100%;"></div>
+      </div>
+      <!-- End Content -->
+    </main>
+
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- JS Implementing Plugins -->
+    <script src="./template_admin/front-dashboard/assets/js/vendor.min.js"></script>
+    <script src="./template_admin/front-dashboard/assets/js/theme.min.js"></script>
+
+    <script>
+      $(document).on('ready', function () {
+        // ONLY DEV
+        // =======================================================
+
+        // INITIALIZATION OF DATATABLES
+        // =======================================================
+        var datatable = $.HSCore.components.HSDatatables.init($('#datatable'), {
+          dom: 'Bfrtip',
+          buttons: [
+            {
+              extend: 'copy',
+              className: 'd-none'
+            },
+            {
+              extend: 'excel',
+              className: 'd-none'
+            },
+            {
+              extend: 'csv',
+              className: 'd-none'
+            },
+            {
+              extend: 'pdf',
+              className: 'd-none'
+            },
+            {
+              extend: 'print',
+              className: 'd-none'
+            }
+          ],
+          select: {
+            style: 'multi',
+            selector: 'td:first-child input[type="checkbox"]',
+            classMap: {
+              checkAll: '#datatableCheckAll',
+              counter: '#datatableCounter',
+              counterInfo: '#datatableCounterInfo'
+            }
+          }
+        })
+
+        $('#export-copy').click(function () {
+          datatable.button('.buttons-copy').trigger()
+        })
+
+        $('#export-excel').click(function () {
+          datatable.button('.buttons-excel').trigger()
+        })
+
+        $('#export-csv').click(function () {
+          datatable.button('.buttons-csv').trigger()
+        })
+
+        $('#export-pdf').click(function () {
+          datatable.button('.buttons-pdf').trigger()
+        })
+
+        $('#export-print').click(function () {
+          datatable.button('.buttons-print').trigger()
+        })
+
+        // INITIALIZATION OF CLIPBOARD
+        // =======================================================
+        $('.js-clipboard').each(function () {
+          var clipboard = $.HSCore.components.HSClipboard.init(this)
+        })
+
+        // INITIALIZATION OF SELECT2
+        // =======================================================
+        $('.js-select2-custom').each(function () {
+          var select2 = $.HSCore.components.HSSelect2.init($(this))
+        })
+      })
+    </script>
+    <!-- IE Support -->
+    <script>
+      if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent))
+        document.write(
+          '<script src="../assets/vendor/babel-polyfill/polyfill.min.js"><\/script>'
+        )
+    </script>
+
+    <div class="hs-unfold-overlay"></div>
+  </body>
+</html>

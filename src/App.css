@@ -1,0 +1,220 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+html,
+body {
+  font-size: 13px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.view-map {
+  height: calc(100vh - 4.5rem);
+  /* width: 100vw; */
+}
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.pointer {
+  cursor: pointer;
+}
+.fs-6 {
+  font-size: 10px;
+}
+.fs-5 {
+  font-size: 12px;
+}
+.fs-4 {
+  font-size: 14px;
+}
+.fs-3 {
+  font-size: 16px;
+}
+.fs-2 {
+  font-size: 18px;
+}
+.fs-1 {
+  font-size: 20px;
+}
+.check-folder {
+  top: 10px;
+  left: 20px;
+  z-index: 1000;
+}
+.no-wrap {
+  flex-wrap: nowrap;
+}
+.btn-icon-head {
+  padding: 5px !important;
+  width: auto;
+  height: auto;
+}
+.esri-print {
+  display: none;
+  z-index: 1000;
+}
+.navbar-vertical-right {
+  position: fixed;
+  right: 0;
+  top: 4.25rem;
+  z-index: 100;
+  width: 25.25rem;
+  height: calc(100% - 4.25rem);
+}
+.fw-bold {
+  font-weight: bold;
+}
+.fw-500 {
+  font-weight: 500;
+}
+.fw-600 {
+  font-weight: 600;
+}
+.active-gray {
+  background: #377dff40;
+}
+.modal-header {
+  border-bottom: 0.0625rem solid #e7eaf3;
+}
+.text-red {
+  color: red !important;
+}
+.edit-form {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 99;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  background: white;
+  border-radius: 50%;
+}
+.nav-item:hover {
+  background: rgba(0, 0, 0, 0.027);
+}
+.form-rj {
+  height: calc(100%-4.25rem);
+  max-height: calc(100%-4.25rem);
+}
+.body-form-rj {
+  max-height: 100%;
+  overflow: auto;
+}
+@media (max-width: 575.98px) {
+  .show-mobile {
+    display: inline;
+  }
+  .show-desk {
+    display: none;
+  }
+  .ml-25 {
+    margin-left: 0rem;
+  }
+  .navbar-vertical-right {
+    width: 100%;
+  }
+  .show-aside {
+    margin-left: 0rem !important;
+  }
+}
+@media (min-width: 576px) {
+  .show-mobile {
+    display: inline;
+  }
+  .show-desk {
+    display: none;
+  }
+  .ml-25 {
+    margin-left: 0rem;
+  }
+}
+@media (min-width: 768px) {
+  .show-mobile {
+    display: none;
+  }
+  .show-desk {
+    display: inline;
+  }
+  .ml-25 {
+    margin-left: 0rem;
+  }
+  .show-aside {
+    margin-left: 0rem !important;
+  }
+}
+@media (min-width: 992px) {
+  .show-mobile {
+    display: none;
+  }
+  .show-desk {
+    display: inline;
+  }
+  .ml-25 {
+    margin-left: 25.25rem;
+  }
+  .show-aside {
+    margin-left: -100% !important;
+  }
+}
+@media (min-width: 1200px) {
+  .show-mobile {
+    display: none;
+  }
+  .show-desk {
+    display: inline;
+  }
+  .ml-25 {
+    margin-left: 25.25rem;
+  }
+  .show-aside {
+    margin-left: -100% !important;
+  }
+}
+@media (min-width: 1400px) {
+  .show-mobile {
+    display: none;
+  }
+  .show-desk {
+    display: inline;
+  }
+  .ml-25 {
+    margin-left: 25.25rem;
+  }
+  .show-aside {
+    margin-left: -100% !important;
+  }
+}
+.aside-form-duong {
+  width: 100%;
+  height: auto;
+  top: auto;
+  bottom: 0;
+}
